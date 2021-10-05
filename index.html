@@ -8,12 +8,51 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="container">
+      <div class="header">
+        <button onclick="generate()">Generera ny lista</button>
+        <div class="slider-container">
+          <div>
+            <p>Ändra antal element</p>
+            <input
+              type="range"
+              min="4"
+              max="200"
+              value="100"
+              id="noOfElements"
+            />
+          </div>
+        </div>
+        <div>
+          <input
+            checked
+            type="radio"
+            value="merge_sort"
+            name="sorting-algo-radio"
+            id="radio1"
+          />
+          <label for="radio1">Merge Sort</label>
+
+          <input
+            type="radio"
+            value="quick_sort"
+            name="sorting-algo-radio"
+            id="radio2"
+          />
+          <label for="radio2">Quick Sort</label>
+
+          <input
+            type="radio"
+            value="bubble_sort"
+            name="sorting-algo-radio"
+            id="radio3"
+          />
+          <label for="radio3">Bubble Sort</label>
+        </div>
+        <button onclick="handleSortPress()">Sortera</button>
+      </div>
+    </div>
     <div class="sorting-container" id="sorting-container"></div>
-    <input type="range" min="1" max="100" value="50" id="range" />
-    <p>Range: <span id="rangeOutput"></span></p>
-    <input type="range" min="1" max="100" value="50" id="noOfElements" />
-    <p>Number of Elements: <span id="noOfElementsOutput"></span></p>
     <script src="index.js"></script>
-    <button onclick="handleSubmit()">Submit</button>
   </body>
 </html>

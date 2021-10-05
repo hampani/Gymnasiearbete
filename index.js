@@ -1,44 +1,52 @@
-const parentDiv = document.getElementById("sorting-container");
+const range = 100;
 
-const generateRandomArray = (noOfElements, range) => {
+// Elements
+const parentDiv = document.getElementById("sorting-container");
+const noOfElementsSlider = document.getElementById("noOfElements");
+const radioButtons = document.getElementsByName("sorting-algo-radio");
+
+// Listeners
+noOfElementsSlider.oninput = () => {
+  handleSlider();
+};
+
+const generateRandomArray = (noOfElements) => {
+  // Hard coded range to 100. Varför skulle man vilja ändra range?
   const arr = [];
+
   for (let i = 0; i < noOfElements; i++) {
-    arr.push(Math.floor(Math.random() * range + 1));
+    //Kan teoretiskt sätt vara 0?
+    arr.push(Math.floor(Math.random() * range) + 1);
   }
   return arr;
 };
-
-const constant = 10;
 
 const displayArray = (arr) => {
   arr.forEach((elemNumber) => {
     const element = document.createElement("div");
 
-    console.log(elemNumber);
-
     element.classList.add("element");
-    element.style.height = elemNumber * constant + "px";
+    element.style.height = elemNumber + "%";
 
     parentDiv.appendChild(element);
   });
 };
 
-const generate = (noOfElements = 20, range = 20) => {
+const generate = (noOfElements = 50) => {
   parentDiv.innerHTML = "";
-  displayArray(generateRandomArray(noOfElements, range));
+  displayArray(generateRandomArray(noOfElements));
 };
 
-const handleSubmit = () => {
-  const range = document.getElementById("range").value;
-  const noOfElements = document.getElementById("noOfElements").value;
+const handleSlider = () => {
+  generate(noOfElementsSlider.value);
+};
 
-  const rangeOutput = document.getElementById("rangeOutput");
-  const noOfElementsOutput = document.getElementById("noOfElementsOutput");
-
-  rangeOutput.innerHTML = range;
-  noOfElementsOutput.innerHTML = noOfElements;
-
-  generate(noOfElements, range);
+const handleSortPress = () => {
+  radioButtons.forEach((elem) => {
+    if (elem.checked) {
+      console.log(elem.value);
+    }
+  });
 };
 
 generate();

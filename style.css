@@ -1,5 +1,10 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
 .element {
-  width: 10%;
+  width: 100%;
   background-color: red;
   border: 1px black solid;
 }
@@ -8,7 +13,48 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-evenly;
-  width: 80vw;
-  height: 80vh;
+  width: 100%;
+  height: calc(100vh - 80px);
   background-color: gray;
+}
+
+.slider-container {
+  display: flex;
+}
+
+input[type="radio"] {
+  visibility: hidden;
+}
+label {
+  cursor: pointer;
+}
+input:checked + label {
+  color: red;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 80px;
+}
+
+@media (max-width: 768px) {
+  .sorting-container {
+    height: calc(100vh - 150px);
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header > * {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 }
