@@ -7,7 +7,7 @@ const radioButtons = document.getElementsByName("sorting-algo-radio");
 
 // Listeners
 noOfElementsSlider.oninput = () => {
-  handleSlider();
+  generate();
 };
 
 const generateRandomArray = (noOfElements) => {
@@ -32,13 +32,9 @@ const displayArray = (arr) => {
   });
 };
 
-const generate = (noOfElements = 50) => {
+const generate = () => {
   parentDiv.innerHTML = "";
-  displayArray(generateRandomArray(noOfElements));
-};
-
-const handleSlider = () => {
-  generate(noOfElementsSlider.value);
+  displayArray(generateRandomArray(noOfElementsSlider.value));
 };
 
 const handleSortPress = () => {
