@@ -13,6 +13,9 @@ noOfElementsSlider.oninput = () => {
 
 let currentArr = [];
 
+const getBackgroundColor = (elemNumber, arrLength) =>
+  "hsl(" + (360 * elemNumber) / arrLength + ",80%,50%)";
+
 const generateRandomArray = (noOfElements) => {
   // Hard coded range to 100. Varför skulle man vilja ändra range?
   const arr = [];
@@ -30,6 +33,7 @@ const displayArray = (arr) => {
 
     element.classList.add("element");
     element.style.height = elemNumber + "%";
+    element.style.backgroundColor = getBackgroundColor(elemNumber, arr.length);
     element.id = index;
 
     parentDiv.appendChild(element);
@@ -96,11 +100,15 @@ const bubbleSort = async (delay) => {
         array[j + 1] = temp;
       }
 
-      elements[j].style.backgroundColor = "white";
-      elements[j + 1].style.backgroundColor = "white";
+      elements[j].style.backgroundColor = getBackgroundColor(
+        array[j],
+        array.length
+      );
+      elements[j + 1].style.backgroundColor = getBackgroundColor(
+        array[j + 1],
+        array.length
+      );
     }
-
-    elements[elements.length - i - 1].style.backgroundColor = "green";
   }
   isSorting = false;
 };

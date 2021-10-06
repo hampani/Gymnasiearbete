@@ -1,12 +1,25 @@
 * {
   padding: 0px;
   margin: 0px;
+  font-family: sans-serif;
+  font-size: 1em;
 }
 
 .element {
   width: 100%;
-  background-color: white;
   border: 1px black solid;
+}
+
+button {
+  height: 30px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px rgb(232, 233, 235) solid;
+  border-radius: 5px;
+  color: #393e4d;
 }
 
 .sorting-container {
@@ -42,13 +55,13 @@ input:checked + label {
 
 @media (max-width: 768px) {
   .sorting-container {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 200px);
   }
 
   .header {
     display: flex;
     flex-direction: column;
-    height: 150px;
+    height: 200px;
     align-items: center;
     justify-content: space-between;
   }
