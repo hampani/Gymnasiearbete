@@ -28,7 +28,7 @@ const getBackgroundColor = (elemNumber, arrLength) => {
   const blue  = sin_to_hex(elemNumber, 1 * Math.PI * 2/3); // 120 deg
   const green = sin_to_hex(elemNumber, 2 * Math.PI * 2/3); // 240 deg
 
-  return "#" + red + green + blue;
+  return "#" + red + blue + green;
 }
 
 const generateRandomArray = (noOfElements) => {
