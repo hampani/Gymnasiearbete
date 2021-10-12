@@ -13,6 +13,7 @@ noOfElementsSlider.oninput = () => {
 
 let currentArr = [];
 
+// Fungerar inte
 const getBackgroundColor = (elemNumber, arrLength) =>
   "hsl(" + (360 * elemNumber) / arrLength + ",80%,50%)";
 
