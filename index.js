@@ -15,7 +15,7 @@ let currentArr = [];
 
 // Fungerar inte
 const getBackgroundColor = (elemNumber, arrLength) =>
-  "hsl(" + (360 * elemNumber) / arrLength + ",80%,50%)";
+  "hsl(" + (360 * (elemNumber / arrLength) ) + ",80%,50%)";
 
 const generateRandomArray = (noOfElements) => {
   // Hard coded range to 100. Varför skulle man vilja ändra range?
