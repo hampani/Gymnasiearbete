@@ -16,7 +16,7 @@ let currentArr = [];
 // Fungerar inte
 
 const getBackgroundColor = (elemNumber, arrLength) => {
-  const frequency=5;
+  const frequency=5/arrLength;
   const i = elemNumber;
   const r = Math.floor(Math.sin(frequency*i + 0) * (127) + 128);
   const g = Math.floor(Math.sin(frequency*i + 2) * (127) + 128)
