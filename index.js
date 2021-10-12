@@ -15,14 +15,20 @@ let currentArr = [];
 
 // Fungerar inte
 
-const getBackgroundColor = (elemNumber, arrLength) => {
-  const frequency=5/arrLength;
-  const i = elemNumber;
-  const r = Math.floor(Math.sin(frequency*i + 0) * (127) + 128);
-  const g = Math.floor(Math.sin(frequency*i + 2) * (127) + 128)
-  const b = Math.floor(Math.sin(frequency*i + 4) * (127) + 128);
+function sin_to_hex(i, phase) {
+  var sin = Math.sin(Math.PI / size * 2 * i + phase);
+  var int = Math.floor(sin * 127) + 128;
+  var hex = int.toString(16);
 
-  return "rgba(" + r + "," + g + "," + b + ")";
+  return hex.length === 1 ? "0"+hex : hex;
+}
+
+const getBackgroundColor = (elemNumber, arrLength) => {
+  const red   = sin_to_hex(elemNumber, 0 * Math.PI * 2/3); // 0   deg
+  const blue  = sin_to_hex(elemNumber, 1 * Math.PI * 2/3); // 120 deg
+  const green = sin_to_hex(elemNumber, 2 * Math.PI * 2/3); // 240 deg
+
+  return "#" + red + green + blue;
 }
 
 const generateRandomArray = (noOfElements) => {
