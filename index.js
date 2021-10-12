@@ -14,8 +14,16 @@ noOfElementsSlider.oninput = () => {
 let currentArr = [];
 
 // Fungerar inte
-const getBackgroundColor = (elemNumber, arrLength) =>
-  "hsl(" + (360 * (elemNumber / arrLength) ) + ",80%,50%)";
+
+const getBackgroundColor = (elemNumber, arrLength) => {
+  const frequency=5/arrLength;
+  const i = elemNumber;
+  const r = Math.floor(Math.sin(frequency*i + 0) * (127) + 128);
+  const g = Math.floor(Math.sin(frequency*i + 2) * (127) + 128)
+  const b = Math.floor(Math.sin(frequency*i + 4) * (127) + 128);
+
+  return "rgba(" + r + "," + g + "," + b + ")";
+}
 
 const generateRandomArray = (noOfElements) => {
   // Hard coded range to 100. Varför skulle man vilja ändra range?
