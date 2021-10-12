@@ -16,7 +16,7 @@ let currentArr = [];
 // Fungerar inte
 
 function sin_to_hex(i, phase) {
-  var sin = Math.sin(Math.PI / size * 2 * i + phase);
+  var sin = Math.sin(Math.PI / currentArr.length * 2 * i + phase);
   var int = Math.floor(sin * 127) + 128;
   var hex = int.toString(16);
 
