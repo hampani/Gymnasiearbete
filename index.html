@@ -18,13 +18,9 @@
               type="range"
               min="4"
               max="200"
-              value="100"
+              value="10"
               id="noOfElements"
             />
-          </div>
-          <div>
-            <p>Delay</p>
-            <input type="range" min="0" max="100" value="3" id="delaySlider" />
           </div>
         </div>
         <div>
@@ -52,10 +48,13 @@
           />
           <label for="radio2">Shell Sort</label>
         </div>
-        <button onclick="handleSortPress()">Sortera</button>
+        <button onclick="bubbleSort()">Sortera</button>
       </div>
     </div>
-    <div class="sorting-container" id="sorting-container"></div>
+    <div class="sorting-container" id="sorting-container">
+    </div>
     <script src="index.js"></script>
+
   </body>
 </html>
+

@@ -1,131 +1,123 @@
-const range = 100;
-let isSorting = false;
 
-// Elements
-const parentDiv = document.getElementById("sorting-container");
+//const noOfElements = 10;
+const sortingContainer = document.getElementById("sorting-container");
 const noOfElementsSlider = document.getElementById("noOfElements");
-const radioButtons = document.getElementsByName("sorting-algo-radio");
 
-// Listeners
+let elementArray = [];
+let numberArray = []
+
 noOfElementsSlider.oninput = () => {
   generate();
 };
 
-let currentArr = [];
-
-// Fungerar inte
-
-function sin_to_hex(i, phase) {
-  var sin = Math.sin(Math.PI / currentArr.length * 2 * i + phase);
-  var int = Math.floor(sin * 127) + 128;
-  var hex = int.toString(16);
-
-  return hex.length === 1 ? "0"+hex : hex;
-}
-
-const getBackgroundColor = (elemNumber, arrLength) => {
-  const red   = sin_to_hex(elemNumber, 0 * Math.PI * 2/3); // 0   deg
-  const blue  = sin_to_hex(elemNumber, 1 * Math.PI * 2/3); // 120 deg
-  const green = sin_to_hex(elemNumber, 2 * Math.PI * 2/3); // 240 deg
-
-  return "#" + red + blue + green;
+const calculateDelay = (noOfElements) => {
+  return Math.pow(0.9, noOfElements) + 1
 }
 
 const generateRandomArray = (noOfElements) => {
   // Hard coded range to 100. Varför skulle man vilja ändra range?
-  const arr = [];
+  const numberArr = [];
+  const elementArr = [];
 
   for (let i = 0; i < noOfElements; i++) {
-    //Kan teoretiskt sätt vara 0?
-    arr.push(Math.floor(Math.random() * range) + 1);
+    //Gör så att det inte kan vara 100 eller 1. ger fel med UI
+    const siffra = Math.floor(Math.random() * 99) + 2;
+    numberArr.push(siffra);
+    elementArr.push(skapaElement(siffra, i, noOfElements))
   }
-  currentArr = arr;
+  elementArray = elementArr;
+  numberArray = numberArr;
 };
 
-const displayArray = (arr) => {
-  arr.forEach((elemNumber, index) => {
-    const element = document.createElement("div");
+const skapaElement = (elemNumber, index, noOfElements) => {
+  // 90 p.g.a. 5% margin per sida
+  const elementBredd = 80 / noOfElements;
+  const element = document.createElement("div");
+
+  const delay = calculateDelay(noOfElements);
+
+  const antalMellanrum = noOfElements - 1;
+  const mellanrumBredd = 20 / antalMellanrum;
 
     element.classList.add("element");
     element.style.height = elemNumber + "%";
-    element.style.backgroundColor = getBackgroundColor(elemNumber, arr.length);
-    element.id = index;
+    element.style.width = elementBredd + "%";
+    element.style.left = index * elementBredd + mellanrumBredd * index + "%"
+    element.style.transition = delay + "s";
+    //element.style.left = 1 * index + elementWidth + "%"
 
-    parentDiv.appendChild(element);
-  });
-};
+  if (noOfElements < 30) {
+    const text = document.createElement("p");
+    //text.classList.add("element-text");
+    text.style.fontSize = elementBredd * 20 + "%"
+  
+    text.innerText = elemNumber;
+  
+    element.appendChild(text)
+  }
 
-const generate = () => {
-  if (isSorting) return;
-  parentDiv.innerHTML = "";
-  generateRandomArray(noOfElementsSlider.value);
-  displayArray(currentArr);
-};
+  
 
-const handleSortPress = () => {
-  if (isSorting) return;
-  radioButtons.forEach((elem) => {
-    if (elem.checked) {
-      const delay = document.getElementById("delaySlider").value * 10;
-      if (elem.value === "bubble_sort") {
-        bubbleSort(delay);
-      }
-    }
-  });
-};
+    sortingContainer.appendChild(element);
+    return element;
+}
 
-const swap = async (a, b, delay) => {
-  // Byt styles
-  a.style.backgroundColor = "red";
-  b.style.backgroundColor = "red";
+const byt = async (elemA, elemB, delay) => {
+
+  const temp = elemA.style.left;
+  elemA.style.left = elemB.style.left;
+  elemB.style.left = temp;
 
   await new Promise((resolve) =>
-    setTimeout(() => {
-      resolve();
-    }, delay)
-  );
+        setTimeout(() => {
+          resolve();
+        }, delay * 1000)
+      );
 
-  const temp = a.style.transfrom;
-  a.style.transfrom = b.style.transfrom;
-  b.style.transfrom = temp;
+  sortingContainer.insertBefore(elemB, elemA);
+}
 
-  parentDiv.insertBefore(b, a);
-};
+const jämför = (a, b) => {
+  a.style.backgroundColor = "green";
+  b.style.backgroundColor = "green";
+}
 
-const bubbleSort = async (delay) => {
-  isSorting = true;
-  const array = currentArr;
-  const elements = parentDiv.children;
+const bubbleSort = async () => {
+  const array = numberArray;
+  const elements = sortingContainer.children;
+
+  const delay = calculateDelay(array.length);
 
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - i - 1; j++) {
-      elements[j].style.backgroundColor = "blue";
-      elements[j + 1].style.backgroundColor = "blue";
+      elements[j].style.backgroundColor = "green";
+      elements[j + 1].style.backgroundColor = "green";
 
       await new Promise((resolve) =>
         setTimeout(() => {
           resolve();
-        }, delay)
+        }, delay * 1000)
       );
 
       if (array[j] > array[j + 1]) {
-        await swap(elements[j], elements[j + 1], delay);
+        await byt(elements[j], elements[j + 1], delay);
         let temp = array[j];
         array[j] = array[j + 1];
         array[j + 1] = temp;
       }
 
-      elements[j].style.backgroundColor = getBackgroundColor(
-        array[j],
-        array.length
-      );
-      elements[j + 1].style.backgroundColor = getBackgroundColor(
-        array[j + 1],
-        array.length
-      );
+      elements[j].style.backgroundColor = "red"
+      elements[j + 1].style.backgroundColor = "red"
     }
+    elements[array.length - 1 - i].style.backgroundColor = "yellow"
   }
-  isSorting = false;
 };
 
-generate();
+
+const generate = () => {
+  sortingContainer.innerHTML = "";
+  generateRandomArray(noOfElementsSlider.value)
+  console.log("generationg")
+};
+
+generate()
