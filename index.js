@@ -48,7 +48,7 @@ const skapaElement = (elemNumber, index, noOfElements) => {
 
   if (noOfElements < 30) {
     const text = document.createElement("p");
-    //text.classList.add("element-text");
+    text.classList.add("element-text");
     text.style.fontSize = elementBredd * 20 + "%"
   
     text.innerText = elemNumber;

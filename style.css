@@ -6,7 +6,7 @@
 }
 
 .element {
-  background-color: red;
+  background-color: #3575FF;
   position: absolute;
 
   left: 100px;
@@ -19,7 +19,9 @@
   padding-top: 10px;
 }
 
-
+.element-text {
+  color: white
+}
 
 button {
   height: 30px;
@@ -36,7 +38,7 @@ button {
 .sorting-container {
   width: 100%;
   height: calc(100vh - 80px);
-  background-color: gray;
+  background-color: #F2F2F2;
   position: relative;
   
 }
@@ -52,7 +54,7 @@ label {
   cursor: pointer;
 }
 input:checked + label {
-  color: red;
+  color: #3575FF;
 }
 
 .header {
