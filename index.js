@@ -75,6 +75,12 @@ const byt = async (elemA, elemB, delay) => {
       );
 
   sortingContainer.insertBefore(elemB, elemA);
+
+  await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve();
+        }, delay * 1000)
+      );
 }
 
 const jämför = (a, b) => {
@@ -106,8 +112,8 @@ const bubbleSort = async () => {
         array[j + 1] = temp;
       }
 
-      elements[j].style.backgroundColor = "red"
-      elements[j + 1].style.backgroundColor = "red"
+      elements[j].style.backgroundColor = "#3575FF"
+      elements[j + 1].style.backgroundColor = "#3575FF"
     }
     elements[array.length - 1 - i].style.backgroundColor = "yellow"
   }
