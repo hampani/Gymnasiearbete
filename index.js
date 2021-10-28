@@ -21,7 +21,7 @@ const generateRandomArray = (noOfElements) => {
 
   for (let i = 0; i < noOfElements; i++) {
     // Genererar en siffra mellan 1-100
-    const siffra = Math.ceil(Math.random() * 100);
+    const siffra = Math.floor(Math.random() * 99) + 2;
     numberArr.push(siffra);
   }
   numberArray = numberArr;
