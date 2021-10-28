@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <div class="header">
-        <button onclick="generate()">Generera ny lista</button>
+        <button id="generate-button">Generera ny lista</button>
         <div class="slider-container">
           <div class="element-input-container">
             <p>Antal Element</p>
@@ -48,13 +48,10 @@
           />
           <label for="radio2">Shell Sort</label>
         </div>
-        <button onclick="bubbleSort()">Sortera</button>
+        <button id="sort-button">Sortera</button>
       </div>
     </div>
-    <div class="sorting-container" id="sorting-container">
-    </div>
-    <script src="index.js"></script>
-
+    <div class="sorting-container" id="sorting-container"></div>
+    <script src="index.js" type="module"></script>
   </body>
 </html>
-
