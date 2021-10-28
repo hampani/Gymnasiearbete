@@ -1,11 +1,11 @@
-import { generate, byt } from "./display.JS";
+import { generate } from "./display.JS";
 import { bubbleSort } from "./algoritmer/bubblesort.JS";
 
-//const noOfElements = 10;
 const noOfElementsSlider = document.getElementById("noOfElements");
 
 const sortButton = document.getElementById("sort-button");
 const generateButton = document.getElementById("generate-button");
+const algorithmInput = document.getElementsByName("sorting-algo-radio");
 
 let numberArray = [];
 let sortingStatus = "idle";
@@ -23,11 +23,25 @@ generateButton.onclick = () => {
   generate(noOfElementsSlider.value);
 };
 
-const sort = () => {
-  if (sortingStatus !== "idle") {
-    return;
+const getInput = () => {
+  //console.log(algorithmInput);
+  for (let i = 0; i < algorithmInput.length; i++) {
+    if (algorithmInput[i].checked) {
+      return algorithmInput[i].value;
+    }
   }
-  bubbleSort(numberArray);
+};
+
+const sort = () => {
+  if (sortingStatus !== "idle") return;
+  switch (getInput()) {
+    case "bubble-sort":
+      bubbleSort(numberArray);
+      break;
+    default:
+      alert(getInput() + " är inte implementerad än!");
+      break;
+  }
 };
 
 numberArray = generate(noOfElementsSlider.value);
