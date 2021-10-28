@@ -3,6 +3,7 @@ const sortingContainer = document.getElementById("sorting-container");
 const noOfElementsSlider = document.getElementById("noOfElements");
 
 let numberArray = [];
+let sortingStatus = "idle";
 
 // När slidern ändras, generar en ny lista lista med det nya antalet element
 noOfElementsSlider.oninput = () => {
@@ -26,6 +27,14 @@ const generateRandomArray = (noOfElements) => {
     numberArr.push(siffra);
   }
   numberArray = numberArr;
+};
+
+const skapaDelay = async (delay) => {
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve();
+    }, delay * 1000)
+  );
 };
 
 // Generarar HTML koden för varje element (pelare)
@@ -65,19 +74,11 @@ const byt = async (elemA, elemB, delay) => {
   elemA.style.left = elemB.style.left;
   elemB.style.left = temp;
 
-  await new Promise((resolve) =>
-    setTimeout(() => {
-      resolve();
-    }, delay * 1000)
-  );
+  await skapaDelay(delay);
 
   sortingContainer.insertBefore(elemB, elemA);
 
-  await new Promise((resolve) =>
-    setTimeout(() => {
-      resolve();
-    }, delay * 1000)
-  );
+  await skapaDelay(delay);
 };
 
 const jämför = (a, b) => {
@@ -96,11 +97,7 @@ const bubbleSort = async () => {
       elements[j].style.backgroundColor = "green";
       elements[j + 1].style.backgroundColor = "green";
 
-      await new Promise((resolve) =>
-        setTimeout(() => {
-          resolve();
-        }, delay * 1000)
-      );
+      await skapaDelay(delay);
 
       if (array[j] > array[j + 1]) {
         await byt(elements[j], elements[j + 1], delay);
