@@ -3,49 +3,49 @@
 const sortingContainer = document.getElementById("sorting-container");
 const noOfElementsSlider = document.getElementById("noOfElements");
 
-let elementArray = [];
 let numberArray = []
 
+// När slidern ändras, generar en ny lista lista med det nya antalet element
 noOfElementsSlider.oninput = () => {
   generate();
 };
 
+// Beräkna den pålagda-delayen i sorteringen. Högt antal element ska ge låg delay och tvärtom
 const calculateDelay = (noOfElements) => {
   return Math.pow(0.9, noOfElements) + 1
 }
 
+// Skapa en array med n antal slumpade siffror. 
 const generateRandomArray = (noOfElements) => {
-  // Hard coded range to 100. Varför skulle man vilja ändra range?
   const numberArr = [];
-  const elementArr = [];
 
   for (let i = 0; i < noOfElements; i++) {
-    //Gör så att det inte kan vara 100 eller 1. ger fel med UI
-    const siffra = Math.floor(Math.random() * 99) + 2;
+    // Genererar en siffra mellan 1-100
+    const siffra = Math.ceil(Math.random() * 100);
     numberArr.push(siffra);
-    elementArr.push(skapaElement(siffra, i, noOfElements))
   }
-  elementArray = elementArr;
   numberArray = numberArr;
 };
 
+// Generarar HTML koden för varje element (pelare)
 const skapaElement = (elemNumber, index, noOfElements) => {
-  // 90 p.g.a. 5% margin per sida
-  const elementBredd = 80 / noOfElements;
+  const elementBredd = 80 / noOfElements; //i procent. Använder 80 p.g.a. 20% av skärmen är till mellanrum dvs. 80% av skärmen är till pelare
+
+  const delay = calculateDelay(noOfElements); //beräkna delay
+
+  const antalMellanrum = noOfElements - 1; //beräkna hur många mellanrum det finns
+  const mellanrumBredd = 20 / antalMellanrum; //totalt 20% av skärmen kommer vara mellanrum. Fördela dessa 20% mellan antalet mellanrum
+
+  
+  // Skapa elementet i DOM
   const element = document.createElement("div");
+  element.classList.add("element"); //ge div klassnamnet "element"
+  element.style.height = elemNumber + "%"; //ge div höjd på x%
+  element.style.width = elementBredd + "%"; //ge div bredd på x%
+  element.style.left = index * elementBredd + mellanrumBredd * index + "%"; //beräkna hur långt ifrån vänsterkanten varje div ska vara.
+  element.style.transition = delay + "s"; //hur lång animationen ska vara
 
-  const delay = calculateDelay(noOfElements);
-
-  const antalMellanrum = noOfElements - 1;
-  const mellanrumBredd = 20 / antalMellanrum;
-
-    element.classList.add("element");
-    element.style.height = elemNumber + "%";
-    element.style.width = elementBredd + "%";
-    element.style.left = index * elementBredd + mellanrumBredd * index + "%"
-    element.style.transition = delay + "s";
-    //element.style.left = 1 * index + elementWidth + "%"
-
+  // Om antalet element mer än 30, lägg till en text med elementets höjd på varje element
   if (noOfElements < 30) {
     const text = document.createElement("p");
     text.classList.add("element-text");
@@ -56,8 +56,7 @@ const skapaElement = (elemNumber, index, noOfElements) => {
     element.appendChild(text)
   }
 
-  
-
+    // Lägg till element som child till div sorting container  
     sortingContainer.appendChild(element);
     return element;
 }
