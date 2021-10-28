@@ -1,9 +1,8 @@
-
 //const noOfElements = 10;
 const sortingContainer = document.getElementById("sorting-container");
 const noOfElementsSlider = document.getElementById("noOfElements");
 
-let numberArray = []
+let numberArray = [];
 
 // När slidern ändras, generar en ny lista lista med det nya antalet element
 noOfElementsSlider.oninput = () => {
@@ -12,16 +11,18 @@ noOfElementsSlider.oninput = () => {
 
 // Beräkna den pålagda-delayen i sorteringen. Högt antal element ska ge låg delay och tvärtom
 const calculateDelay = (noOfElements) => {
-  return Math.pow(0.9, noOfElements) + 1
-}
+  return Math.pow(0.9, noOfElements) + 1;
+};
 
-// Skapa en array med n antal slumpade siffror. 
+// Skapa en array med n antal slumpade siffror.
 const generateRandomArray = (noOfElements) => {
   const numberArr = [];
 
   for (let i = 0; i < noOfElements; i++) {
     // Genererar en siffra mellan 1-100
-    const siffra = Math.floor(Math.random() * 99) + 2;
+    const siffra = Math.ceil(Math.random() * 100);
+    // Skapar och lägger till element till skärm
+    skapaElement(siffra, i, noOfElements);
     numberArr.push(siffra);
   }
   numberArray = numberArr;
@@ -36,7 +37,6 @@ const skapaElement = (elemNumber, index, noOfElements) => {
   const antalMellanrum = noOfElements - 1; //beräkna hur många mellanrum det finns
   const mellanrumBredd = 20 / antalMellanrum; //totalt 20% av skärmen kommer vara mellanrum. Fördela dessa 20% mellan antalet mellanrum
 
-  
   // Skapa elementet i DOM
   const element = document.createElement("div");
   element.classList.add("element"); //ge div klassnamnet "element"
@@ -49,43 +49,41 @@ const skapaElement = (elemNumber, index, noOfElements) => {
   if (noOfElements < 30) {
     const text = document.createElement("p");
     text.classList.add("element-text");
-    text.style.fontSize = elementBredd * 20 + "%"
-  
+    text.style.fontSize = elementBredd * 20 + "%";
+
     text.innerText = elemNumber;
-  
-    element.appendChild(text)
+
+    element.appendChild(text);
   }
 
-    // Lägg till element som child till div sorting container  
-    sortingContainer.appendChild(element);
-    return element;
-}
+  // Lägg till element som child till div sorting container
+  sortingContainer.appendChild(element);
+};
 
 const byt = async (elemA, elemB, delay) => {
-
   const temp = elemA.style.left;
   elemA.style.left = elemB.style.left;
   elemB.style.left = temp;
 
   await new Promise((resolve) =>
-        setTimeout(() => {
-          resolve();
-        }, delay * 1000)
-      );
+    setTimeout(() => {
+      resolve();
+    }, delay * 1000)
+  );
 
   sortingContainer.insertBefore(elemB, elemA);
 
   await new Promise((resolve) =>
-        setTimeout(() => {
-          resolve();
-        }, delay * 1000)
-      );
-}
+    setTimeout(() => {
+      resolve();
+    }, delay * 1000)
+  );
+};
 
 const jämför = (a, b) => {
   a.style.backgroundColor = "green";
   b.style.backgroundColor = "green";
-}
+};
 
 const bubbleSort = async () => {
   const array = numberArray;
@@ -111,18 +109,16 @@ const bubbleSort = async () => {
         array[j + 1] = temp;
       }
 
-      elements[j].style.backgroundColor = "#3575FF"
-      elements[j + 1].style.backgroundColor = "#3575FF"
+      elements[j].style.backgroundColor = "#3575FF";
+      elements[j + 1].style.backgroundColor = "#3575FF";
     }
-    elements[array.length - 1 - i].style.backgroundColor = "yellow"
+    elements[array.length - 1 - i].style.backgroundColor = "yellow";
   }
 };
 
-
 const generate = () => {
   sortingContainer.innerHTML = "";
-  generateRandomArray(noOfElementsSlider.value)
-  console.log("generationg")
+  generateRandomArray(noOfElementsSlider.value);
 };
 
-generate()
+generate();
