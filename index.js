@@ -1,5 +1,6 @@
 import { generate } from "./display.JS";
 import { bubbleSort } from "./algoritmer/bubblesort.JS";
+import { quickSort } from "./algoritmer/quicksort.JS";
 
 const noOfElementsSlider = document.getElementById("noOfElements");
 
@@ -8,11 +9,18 @@ const generateButton = document.getElementById("generate-button");
 const algorithmInput = document.getElementsByName("sorting-algo-radio");
 
 let numberArray = [];
+let elementArray = [];
 let sortingStatus = "idle";
+
+const setArrays = () => {
+  const { numberArr, elementArr } = generate(noOfElementsSlider.value);
+  numberArray = numberArr;
+  elementArray = elementArr;
+};
 
 // När slidern ändras, generar en ny lista lista med det nya antalet element
 noOfElementsSlider.oninput = () => {
-  numberArray = generate(noOfElementsSlider.value);
+  setArrays();
 };
 
 sortButton.onclick = () => {
@@ -20,7 +28,7 @@ sortButton.onclick = () => {
 };
 
 generateButton.onclick = () => {
-  generate(noOfElementsSlider.value);
+  setArrays();
 };
 
 const getInput = () => {
@@ -32,11 +40,16 @@ const getInput = () => {
   }
 };
 
-const sort = () => {
+const sort = async () => {
   if (sortingStatus !== "idle") return;
   switch (getInput()) {
     case "bubble-sort":
       bubbleSort(numberArray);
+      break;
+    case "quick-sort":
+      console.log(
+        await quickSort(numberArray, 0, numberArray.length - 1, elementArray)
+      );
       break;
     default:
       alert(getInput() + " är inte implementerad än!");
@@ -44,4 +57,4 @@ const sort = () => {
   }
 };
 
-numberArray = generate(noOfElementsSlider.value);
+setArrays();

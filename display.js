@@ -6,15 +6,16 @@ const sortingContainer = document.getElementById("sorting-container");
 export const generate = (noOfElements) => {
   sortingContainer.innerHTML = "";
   const numberArr = [];
+  const elementArr = [];
 
   for (let i = 0; i < noOfElements; i++) {
     // Genererar en siffra mellan 1-100
     const siffra = Math.ceil(Math.random() * 100);
     // Skapar och lägger till element till skärm
-    skapaElement(siffra, i, noOfElements);
+    elementArr.push(skapaElement(siffra, i, noOfElements));
     numberArr.push(siffra);
   }
-  return numberArr;
+  return { numberArr, elementArr };
 };
 
 // Generarar HTML koden för varje element (pelare)
@@ -47,6 +48,8 @@ const skapaElement = (elemNumber, index, noOfElements) => {
 
   // Lägg till element som child till div sorting container
   sortingContainer.appendChild(element);
+
+  return element;
 };
 
 export const byt = async (elemA, elemB, delay) => {
