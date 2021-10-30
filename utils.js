@@ -2,7 +2,7 @@ export const skapaDelay = async (delay) => {
   await new Promise((resolve) =>
     setTimeout(() => {
       resolve();
-    }, delay * 0)
+    }, delay * 1000)
   );
 };
 
