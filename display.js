@@ -51,15 +51,3 @@ const skapaElement = (elemNumber, index, noOfElements) => {
 
   return element;
 };
-
-export const byt = async (elemA, elemB, delay) => {
-  const temp = elemA.style.left;
-  elemA.style.left = elemB.style.left;
-  elemB.style.left = temp;
-
-  await skapaDelay(delay);
-
-  sortingContainer.insertBefore(elemB, elemA);
-
-  await skapaDelay(delay);
-};

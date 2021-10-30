@@ -1,11 +1,20 @@
 import { skapaDelay, beräknaDelay } from "../utils.JS";
-import { byt } from "../display.JS";
 
-const sortingContainer = document.getElementById("sorting-container");
+const byt = async (a, b, elementArr) => {
+  const temp = elementArr[a].style.left;
+  elementArr[a].style.left = elementArr[b].style.left;
+  elementArr[b].style.left = temp;
 
-export const bubbleSort = async (array) => {
+  const temp2 = elementArr[a];
+  elementArr[a] = elementArr[b];
+  elementArr[b] = temp2;
+
+  await skapaDelay(1);
+};
+
+export const bubbleSort = async (array, elementArray) => {
   const delay = beräknaDelay(array.length);
-  const elements = sortingContainer.children;
+  const elements = elementArray;
 
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - i - 1; j++) {
@@ -15,7 +24,7 @@ export const bubbleSort = async (array) => {
       await skapaDelay(delay);
 
       if (array[j] > array[j + 1]) {
-        await byt(elements[j], elements[j + 1], delay);
+        await byt(j, j + 1, elements);
         let temp = array[j];
         array[j] = array[j + 1];
         array[j + 1] = temp;

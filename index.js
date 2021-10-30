@@ -44,7 +44,7 @@ const sort = async () => {
   if (sortingStatus !== "idle") return;
   switch (getInput()) {
     case "bubble-sort":
-      bubbleSort(numberArray);
+      bubbleSort(numberArray, elementArray);
       break;
     case "quick-sort":
       console.log(
