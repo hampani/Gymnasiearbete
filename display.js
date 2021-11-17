@@ -41,7 +41,7 @@ const skapaElement = (elemNumber, index, noOfElements) => {
     text.classList.add("element-text");
     text.style.fontSize = elementBredd * 20 + "%";
 
-    text.innerText = elemNumber;
+    text.innerText = Math.round(elemNumber);
 
     element.appendChild(text);
   }
