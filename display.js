@@ -1,19 +1,20 @@
-import { beräknaDelay, skapaDelay } from "./utils.JS";
+import {
+  beräknaDelay,
+  skapaDelay,
+  blanda,
+  skapaArrayMedSiffror,
+} from "./utils.JS";
 
 const sortingContainer = document.getElementById("sorting-container");
 
 // Skapa en array med n antal slumpade siffror.
 export const generate = (noOfElements) => {
   sortingContainer.innerHTML = "";
-  const numberArr = [];
+  const numberArr = blanda(skapaArrayMedSiffror(noOfElements));
+  numberArr.forEach((siffra, index) => {
+    skapaElement(siffra, index, noOfElements);
+  });
 
-  for (let i = 0; i < noOfElements; i++) {
-    // Genererar en siffra mellan 1-100
-    const siffra = Math.ceil(Math.random() * 100);
-    // Skapar och lägger till element till skärm
-    skapaElement(siffra, i, noOfElements);
-    numberArr.push(siffra);
-  }
   return numberArr;
 };
 

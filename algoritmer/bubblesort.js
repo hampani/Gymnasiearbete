@@ -1,9 +1,9 @@
 import { animeraByte } from "../display.JS";
 import { skapaDelay } from "../utils.JS";
 
-export const bubbleSort = async (array) => {
-  const elements = document.getElementById("sorting-container").children;
+const elements = document.getElementById("sorting-container").children;
 
+export const bubbleSort = async (array) => {
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - i - 1; j++) {
       elements[j].classList.add("comparing");
