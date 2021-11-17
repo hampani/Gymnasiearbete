@@ -6,16 +6,15 @@ const sortingContainer = document.getElementById("sorting-container");
 export const generate = (noOfElements) => {
   sortingContainer.innerHTML = "";
   const numberArr = [];
-  const elementArr = [];
 
   for (let i = 0; i < noOfElements; i++) {
     // Genererar en siffra mellan 1-100
     const siffra = Math.ceil(Math.random() * 100);
     // Skapar och lägger till element till skärm
-    elementArr.push(skapaElement(siffra, i, noOfElements));
+    skapaElement(siffra, i, noOfElements);
     numberArr.push(siffra);
   }
-  return { numberArr, elementArr };
+  return numberArr;
 };
 
 // Generarar HTML koden för varje element (pelare)
@@ -50,4 +49,22 @@ const skapaElement = (elemNumber, index, noOfElements) => {
   sortingContainer.appendChild(element);
 
   return element;
+};
+
+export const animeraByte = async (element1, element2) => {
+  //console.log(element1);
+
+  const temp = element1.style.left;
+  element1.style.left = element2.style.left;
+  element2.style.left = temp;
+
+  await skapaDelay(sortingContainer.children.length);
+
+  var clonedElement1 = element1.cloneNode(true);
+  var clonedElement2 = element2.cloneNode(true);
+
+  element2.parentNode?.replaceChild(clonedElement1, element2);
+  element1.parentNode?.replaceChild(clonedElement2, element1);
+
+  await skapaDelay(sortingContainer.children.length);
 };
