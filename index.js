@@ -1,6 +1,7 @@
 import { generate } from "./display.JS";
 import { bubbleSort } from "./algoritmer/bubblesort.JS";
 import { quickSort } from "./algoritmer/quicksort.JS";
+import { shellSort } from "./algoritmer/shellsort.JS";
 
 const noOfElementsSlider = document.getElementById("noOfElements");
 
@@ -63,7 +64,9 @@ const sort = async () => {
       setSortingStatus("idle");
       break;
     default:
-      alert(getInput() + " är inte implementerad än!");
+      setSortingStatus("sorting");
+      await shellSort(numberArray);
+      setSortingStatus("idle");
       break;
   }
 };
