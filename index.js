@@ -37,14 +37,25 @@ const getInput = () => {
   }
 };
 
+export const setSortingStatus = (status) => {
+  sortingStatus = status;
+};
+
 const sort = async () => {
-  if (sortingStatus !== "idle") return;
+  if (sortingStatus !== "idle") {
+    alert("Sortering pågår!");
+    return;
+  }
   switch (getInput()) {
     case "bubble-sort":
-      bubbleSort(numberArray);
+      setSortingStatus("sorting");
+      await bubbleSort(numberArray);
+      setSortingStatus("idle");
       break;
     case "quick-sort":
-      console.log(await quickSort(numberArray, 0, numberArray.length - 1));
+      setSortingStatus("sorting");
+      await quickSort(numberArray, 0, numberArray.length - 1);
+      setSortingStatus("idle");
       break;
     default:
       alert(getInput() + " är inte implementerad än!");
