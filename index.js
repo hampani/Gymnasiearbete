@@ -39,13 +39,18 @@ const getInput = () => {
 
 export const setSortingStatus = (status) => {
   sortingStatus = status;
+  if (status === "sorting") {
+    sortButton.disabled = true;
+    generateButton.disabled = true;
+    noOfElementsSlider.disabled = true;
+  } else {
+    sortButton.disabled = false;
+    generateButton.disabled = false;
+    noOfElementsSlider.disabled = false;
+  }
 };
 
 const sort = async () => {
-  if (sortingStatus !== "idle") {
-    alert("Sortering pågår!");
-    return;
-  }
   switch (getInput()) {
     case "bubble-sort":
       setSortingStatus("sorting");

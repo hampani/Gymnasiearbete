@@ -2,7 +2,7 @@ export const skapaDelay = async (noOfElements) => {
   await new Promise((resolve) =>
     setTimeout(() => {
       resolve();
-    }, beräknaDelay(noOfElements) * 1000)
+    }, beräknaDelay(noOfElements) * 1)
   );
 };
 
