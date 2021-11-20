@@ -1,3 +1,16 @@
+let delay = 1;
+const delaySlider = document.getElementById("delay");
+
+const elements = document.getElementById("sorting-container").children;
+
+delaySlider.oninput = () => {
+  delay = delaySlider.value;
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].style.transition = delaySlider.value + "s";
+  }
+}
+
+
 export const skapaDelay = async (noOfElements) => {
   await new Promise((resolve) =>
     setTimeout(() => {
@@ -7,7 +20,8 @@ export const skapaDelay = async (noOfElements) => {
 };
 
 export const beräknaDelay = (noOfElements) => {
-  return 0.5;
+  console.log(delay)
+  return delay;
   return Math.pow(0.9, noOfElements) + 1;
 };
 

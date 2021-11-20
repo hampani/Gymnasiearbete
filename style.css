@@ -57,6 +57,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-right: 10px;
 }
 
 .sorting-container {
@@ -88,7 +89,7 @@ input:checked + label {
   height: 80px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .sorting-container {
     height: calc(100vh - 200px);
   }

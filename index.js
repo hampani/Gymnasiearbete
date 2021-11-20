@@ -58,7 +58,7 @@ const markAsDone = () => {
   for (var k = 0; k < elements.length; k++) {
     elements[k].classList = "element done";
   }
-}
+};
 
 const sort = async () => {
   switch (getInput()) {
@@ -78,7 +78,7 @@ const sort = async () => {
       setSortingStatus("idle");
       break;
     default:
-      alert("Detta borde inte hända!")
+      alert("Detta borde inte hända!");
   }
 };
 
