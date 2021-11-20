@@ -10,8 +10,6 @@ export const shellSort = async (arr) => {
     for (let i = gap; i < n; i += 1) {
       let j = i;
 
-      console.log("j", j, "i", i);
-
       for (let k = i; k >= 0; k -= gap) {
         elements[k].classList.add("comparable");
       }
@@ -22,10 +20,9 @@ export const shellSort = async (arr) => {
       await skapaDelay();
 
       while (j >= gap && arr[j] < arr[j - gap]) {
+        await skapaDelay();
         elements[j].classList.add("comparing");
         elements[j - gap].classList.add("comparing");
-
-        await skapaDelay();
 
         await animeraByte(elements[j], elements[j - gap]);
         let temp = arr[j];
@@ -35,9 +32,10 @@ export const shellSort = async (arr) => {
         elements[j].classList.remove("comparing");
 
         j -= gap;
-        elements[j - gap]?.classList.add("comparing");
-        await skapaDelay();
-        //elements[j].classList.remove("comparing");
+        if (elements[j - gap]) {
+          elements[j - gap]?.classList.add("comparing");
+          await skapaDelay();
+        }
       }
 
       for (let i = 0; i < elements.length; i++) {

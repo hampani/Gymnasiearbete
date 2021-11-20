@@ -7,7 +7,6 @@ const noOfElementsSlider = document.getElementById("noOfElements");
 
 const elements = document.getElementById("sorting-container").children;
 
-
 const sortButton = document.getElementById("sort-button");
 const generateButton = document.getElementById("generate-button");
 const algorithmInput = document.getElementsByName("sorting-algo-radio");
@@ -48,11 +47,18 @@ export const setSortingStatus = (status) => {
     generateButton.disabled = true;
     noOfElementsSlider.disabled = true;
   } else {
+    markAsDone();
     sortButton.disabled = false;
     generateButton.disabled = false;
     noOfElementsSlider.disabled = false;
   }
 };
+
+const markAsDone = () => {
+  for (var k = 0; k < elements.length; k++) {
+    elements[k].classList = "element done";
+  }
+}
 
 const sort = async () => {
   switch (getInput()) {
@@ -64,9 +70,6 @@ const sort = async () => {
     case "quick-sort":
       setSortingStatus("sorting");
       console.log(await quickSort(numberArray, 0, numberArray.length - 1));
-      for (var k = 0; k < elements.length; k++) {
-        elements[k].classList = "element done"
-    }
       setSortingStatus("idle");
       break;
     default:

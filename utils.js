@@ -7,7 +7,7 @@ export const skapaDelay = async (noOfElements) => {
 };
 
 export const beräknaDelay = (noOfElements) => {
-  return 1;
+  return 0.5;
   return Math.pow(0.9, noOfElements) + 1;
 };
 
