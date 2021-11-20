@@ -1,5 +1,5 @@
-import { animeraByte } from "../display.JS";
-import { skapaDelay } from "../utils.JS";
+import { animeraByte } from "../display.js";
+import { skapaDelay } from "../utils.js";
 
 const elements = document.getElementById("sorting-container").children;
 

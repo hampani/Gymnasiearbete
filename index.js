@@ -1,7 +1,7 @@
-import { generate } from "./display.JS";
-import { bubbleSort } from "./algoritmer/bubblesort.JS";
-import { quickSort } from "./algoritmer/quicksort.JS";
-import { shellSort } from "./algoritmer/shellsort.JS";
+import { generate } from "./display.js";
+import { bubbleSort } from "./algoritmer/bubblesort.js";
+import { quickSort } from "./algoritmer/quicksort.js";
+import { shellSort } from "./algoritmer/shellsort.js";
 
 const noOfElementsSlider = document.getElementById("noOfElements");
 

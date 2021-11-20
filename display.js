@@ -3,7 +3,7 @@ import {
   skapaDelay,
   blanda,
   skapaArrayMedSiffror,
-} from "./utils.JS";
+} from "./utils.js";
 
 const sortingContainer = document.getElementById("sorting-container");
 
