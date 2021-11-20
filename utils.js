@@ -6,22 +6,21 @@ const elements = document.getElementById("sorting-container").children;
 delaySlider.oninput = () => {
   delay = delaySlider.value;
   for (let i = 0; i < elements.length; i++) {
-    elements[i].style.transition = delaySlider.value + "s";
+    elements[i].style.transition = beräknaDelay() + "s";
   }
 }
 
 
-export const skapaDelay = async (noOfElements) => {
+export const skapaDelay = async () => {
   await new Promise((resolve) =>
     setTimeout(() => {
       resolve();
-    }, beräknaDelay(noOfElements) * 1000)
+    }, beräknaDelay() * 1000)
   );
 };
 
-export const beräknaDelay = (noOfElements) => {
-  console.log(delay)
-  return delay;
+export const beräknaDelay = () => {
+  return delay / 5;
   return Math.pow(0.9, noOfElements) + 1;
 };
 
