@@ -1,4 +1,5 @@
 import { animeraByte } from "../display.JS";
+import { skapaDelay } from "../utils.JS";
 
 const elements = document.getElementById("sorting-container").children;
 
@@ -7,15 +8,43 @@ export const shellSort = async (arr) => {
 
   for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
     for (let i = gap; i < n; i += 1) {
-      let temp = arr[i];
+      let j = i;
 
-      let j;
-      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
-        arr[j] = arr[j - gap];
-        await animeraByte(elements[j], elements[j - gap]);
+      console.log("j", j, "i", i);
+
+      for (let k = i; k >= 0; k -= gap) {
+        elements[k].classList.add("comparable");
       }
 
-      arr[j] = temp;
+      elements[i].classList.add("comparing");
+      elements[i - gap].classList.add("comparing");
+
+      await skapaDelay();
+
+      while (j >= gap && arr[j] < arr[j - gap]) {
+        elements[j].classList.add("comparing");
+        elements[j - gap].classList.add("comparing");
+
+        await skapaDelay();
+
+        await animeraByte(elements[j], elements[j - gap]);
+        let temp = arr[j];
+        arr[j] = arr[j - gap];
+        arr[j - gap] = temp;
+
+        elements[j].classList.remove("comparing");
+
+        j -= gap;
+        elements[j - gap]?.classList.add("comparing");
+        await skapaDelay();
+        //elements[j].classList.remove("comparing");
+      }
+
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].classList = "element";
+      }
+
+      await skapaDelay();
     }
   }
 
