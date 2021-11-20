@@ -72,11 +72,13 @@ const sort = async () => {
       console.log(await quickSort(numberArray, 0, numberArray.length - 1));
       setSortingStatus("idle");
       break;
-    default:
+    case "shell-sort":
       setSortingStatus("sorting");
       await shellSort(numberArray);
       setSortingStatus("idle");
       break;
+    default:
+      alert("Detta borde inte hända!")
   }
 };
 
