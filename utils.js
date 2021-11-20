@@ -2,11 +2,12 @@ export const skapaDelay = async (noOfElements) => {
   await new Promise((resolve) =>
     setTimeout(() => {
       resolve();
-    }, beräknaDelay(noOfElements) * 1)
+    }, beräknaDelay(noOfElements) * 1000)
   );
 };
 
 export const beräknaDelay = (noOfElements) => {
+  return 1;
   return Math.pow(0.9, noOfElements) + 1;
 };
 

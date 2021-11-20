@@ -5,6 +5,9 @@ import { shellSort } from "./algoritmer/shellsort.JS";
 
 const noOfElementsSlider = document.getElementById("noOfElements");
 
+const elements = document.getElementById("sorting-container").children;
+
+
 const sortButton = document.getElementById("sort-button");
 const generateButton = document.getElementById("generate-button");
 const algorithmInput = document.getElementsByName("sorting-algo-radio");
@@ -60,7 +63,10 @@ const sort = async () => {
       break;
     case "quick-sort":
       setSortingStatus("sorting");
-      await quickSort(numberArray, 0, numberArray.length - 1);
+      console.log(await quickSort(numberArray, 0, numberArray.length - 1));
+      for (var k = 0; k < elements.length; k++) {
+        elements[k].classList = "element done"
+    }
       setSortingStatus("idle");
       break;
     default:
