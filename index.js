@@ -69,7 +69,7 @@ const sort = async () => {
       break;
     case "quick-sort":
       setSortingStatus("sorting");
-      console.log(await quickSort(numberArray, 0, numberArray.length - 1));
+      await quickSort(numberArray, 0, numberArray.length - 1);
       setSortingStatus("idle");
       break;
     case "shell-sort":
